@@ -26,16 +26,16 @@ fetch('http://localhost:8905/taskItem/read')
   function createTableHead(table,data) {
       let tableHead = table.createTHead();
       let row = tableHead.insertRow();
-      for (let keys of data){
-          if(key == "Item Task"){
-              console.log("skip");
-          }else {
-          let th = document.createElement("th");
-          let text = document.createTextNode(keys);
-          th.appendChild(text);
-          row.appendChild(th)
-          }
-      }
+    //   for (let keys of data){
+    //       if(key == "itemTask"){
+    //           console.log("skip");
+    //       }else {
+    //       let th = document.createElement("th");
+    //       let text = document.createTextNode(keys);
+    //       th.appendChild(text);
+    //       row.appendChild(th)
+    //       }
+     // }
       let th2 = document.createElement("th")
       let text2 = document.createTextNode("View");
       th2.appendChild(text2);
