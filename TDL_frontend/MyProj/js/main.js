@@ -59,9 +59,16 @@ fetch('http://localhost:8905/taskItem/read')
           let newCell = row.insertCell();
           let myViewButton = document.createElement("a");
           let myButtonValue = document.createTextNode("View");
-          myViewButton.className = "btn btn-danger";
+          myViewButton.className = "btn btn-primary";
           myViewButton.href='record.html?id='+taskItemRecord.id 
           myViewButton.appendChild(myButtonValue);
           newCell.appendChild(myViewButton);
-      }
+        
+        let newCell2 = row.insertCell();
+          let myDeleteButton = document.createElement("b");
+          let myDeleteValue = document.createTextNode("Delete");
+          myDeleteButton.className = "btn btn-danger"; 
+          myDeleteButton.appendChild(myDeleteValue);
+          newCell2.appendChild(myDeleteButton);
+        }
   }
