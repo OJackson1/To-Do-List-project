@@ -86,9 +86,9 @@ public class TaskItemController {
         return ResponseEntity.ok(this.service.findByNameJPQL(name));
     }
 
-    @GetMapping("/searchType/{tasks}")
-    public ResponseEntity<List<TaskItemDTO>> findByTypeJPQL(@PathVariable String tasks) {
-        return ResponseEntity.ok(this.service.findByTypeJPQL(tasks));
+    @GetMapping("/searchType/{task}")
+    public ResponseEntity<List<TaskItemDTO>> findByTypeJPQL(@PathVariable String task) {
+        return ResponseEntity.ok(this.service.findByTypeJPQL(task));
     }
 
 }

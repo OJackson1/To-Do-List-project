@@ -18,9 +18,9 @@ import lombok.ToString;
 public class TaskItemDTO {
 	
 
-    private Long taskItemid;
+    private Long taskItemId;
     private String name;
-    private String tasks;
+    private String task;
 
 
 }

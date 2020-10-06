@@ -34,15 +34,14 @@ public class TaskItem {
     private String name;
 
     @NotNull
-    private String tasks;
-
     @ManyToOne
-    private Task task;
+    private String task;
 
-    public TaskItem(String name, String tasks) {
+
+    public TaskItem(String name, String task) {
         super();
         this.name = name;
-        this.tasks = tasks;
+        this.task = task;
     }
 
 
