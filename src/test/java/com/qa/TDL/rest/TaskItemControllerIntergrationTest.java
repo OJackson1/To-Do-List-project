@@ -22,18 +22,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.TDL.dto.TaskItemDTO;
 import com.qa.TDL.persistence.domain.TaskItem;
 import com.qa.TDL.persistence.repository.TaskItemRepository;
-import com.qa.TDL.dto.TaskItemDTO;
-import com.qa.TDL.persistence.domain.TaskItem;
-import com.qa.TDL.persistence.repository.TaskItemRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TaskItemControllerIntergrationTest {
-	
-	 // autowiring objects for mocking different aspects of the application
-    // here, a mock repo (and relevant mappers) are autowired
-    // they'll 'just work', so we don't need to worry about them
-    // all we're testing is how our controller integrates with the rest of the API
 
     @Autowired
     private MockMvc mock;

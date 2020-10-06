@@ -1,5 +1,6 @@
 package com.qa.TDL.persistence.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +30,7 @@ public class TaskItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskItemId;
 
+	@Column(name = "task_item_name")
     @NotNull
     @Size(min = 0, max = 55)
     private String name;
@@ -38,7 +40,7 @@ public class TaskItem {
     private String task;
 
 
-    public TaskItem(String name, String task) {
+    public TaskItem(@NotNull @Size(min = 1, max = 100) String name, String task) {
         super();
         this.name = name;
         this.task = task;

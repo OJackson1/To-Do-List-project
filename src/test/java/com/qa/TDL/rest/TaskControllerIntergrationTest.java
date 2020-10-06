@@ -40,7 +40,7 @@ public class TaskControllerIntergrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private Long id;
+    private Long taskId;
     private Task testTask;
     private Task testTaskWithId;
     
@@ -53,7 +53,7 @@ public class TaskControllerIntergrationTest {
         this.repo.deleteAll();
         this.testTask = new Task("Shopping");
         this.testTaskWithId = this.repo.save(this.testTask);
-        this.id = this.testTaskWithId.getTaskId();
+        this.taskId = this.testTaskWithId.getTaskId();
     }
 
     @Test
@@ -70,7 +70,7 @@ public class TaskControllerIntergrationTest {
     @Test
     void testRead() throws Exception {
         this.mock
-            .perform(request(HttpMethod.GET, "/task/read/" + this.id)
+            .perform(request(HttpMethod.GET, "/task/read/" + this.taskId)
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().json(this.objectMapper.writeValueAsString(this.testTask)));
@@ -94,10 +94,10 @@ public class TaskControllerIntergrationTest {
     void testUpdate() throws Exception {
         Task newTask = new Task("Shopping");
         Task updatedTask = new Task(newTask.getName());
-        updatedTask.setTaskId(this.id);
+        updatedTask.setTaskId(this.taskId);
 
         String result = this.mock
-            .perform(request(HttpMethod.PUT, "/task/update/" + this.id)
+            .perform(request(HttpMethod.PUT, "/task/update/" + this.taskId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(newTask)))
@@ -110,7 +110,7 @@ public class TaskControllerIntergrationTest {
     @Test
     void testDelete() throws Exception {
         this.mock
-            .perform(request(HttpMethod.DELETE, "/task/delete/" + this.id))
+            .perform(request(HttpMethod.DELETE, "/task/delete/" + this.taskId))
             .andExpect(status().isNoContent());
     }
 
