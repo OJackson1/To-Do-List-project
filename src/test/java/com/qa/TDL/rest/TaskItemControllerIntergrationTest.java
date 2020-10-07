@@ -31,7 +31,7 @@ public class TaskItemControllerIntergrationTest {
     private MockMvc mock;
 
     @Autowired
-    private TaskItemRepository repo;
+    private TaskItemRepository repository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -45,7 +45,6 @@ public class TaskItemControllerIntergrationTest {
 
     private Long taskItemId;
     private String testName;
-    private String testTask;
 
     private TaskItemDTO mapToDTO(TaskItem taskItem) {
         return this.modelMapper.map(taskItem, TaskItemDTO.class);
@@ -53,15 +52,14 @@ public class TaskItemControllerIntergrationTest {
 
     @BeforeEach
     void init() {
-        this.repo.deleteAll();
+        this.repository.deleteAll();
 
         this.testTaskItem = new TaskItem("Shopping");
-        this.testTaskItemWithId = this.repo.save(this.testTaskItem);
+        this.testTaskItemWithId = this.repository.save(this.testTaskItem);
         this.taskItemDTO = this.mapToDTO(testTaskItemWithId);
 
         this.taskItemId = this.testTaskItemWithId.getTaskItemId();
         this.testName = this.testTaskItemWithId.getName();
-        this.testTask = this.testTaskItemWithId.getTask();
     }
 
     @Test
@@ -87,58 +85,30 @@ public class TaskItemControllerIntergrationTest {
         taskItemList.add(this.taskItemDTO);
 
         String content = this.mock
-                .perform(request(HttpMethod.GET, "/taskItem/read").accept(MediaType.APPLICATION_JSON))
+                .perform(request(HttpMethod.GET, "/taskItem/readAll").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
         assertEquals(this.objectMapper.writeValueAsString(taskItemList), content);
     }
 
-//    @Test
-//    void testUpdate() throws Exception {
-//        TaskItemDTO newTaskItem = new TaskItemDTO(null, "Ben Jackson","Fitness");
-//        TaskItem updatedTaskItem = new TaskItem(newTaskItem.getName(),
-//                newTaskItem.getTask());
-//        updatedTaskItem.setTaskItemId(this.taskItemId);
-//
-//        String result = this.mock
-//                .perform(request(HttpMethod.PUT, "/taskItemupdate/" + this.taskItemId).accept(MediaType.APPLICATION_JSON)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(this.objectMapper.writeValueAsString(newTaskItem)))
-//                .andExpect(status().isAccepted()).andReturn().getResponse().getContentAsString();
-//
-//        assertEquals(this.objectMapper.writeValueAsString(this.mapToDTO(updatedTaskItem)), result);
-//    }
+    @Test
+    void testUpdate() throws Exception {
+        TaskItemDTO newTaskItem = new TaskItemDTO(null, "Eggs");
+        TaskItem updatedTaskItem = new TaskItem(newTaskItem.getName());
+        updatedTaskItem.setTaskItemId(this.taskItemId);
+
+        String result = this.mock
+                .perform(request(HttpMethod.PUT, "/taskItem/update/" + this.taskItemId).accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(this.objectMapper.writeValueAsString(newTaskItem)))
+                .andExpect(status().isAccepted()).andReturn().getResponse().getContentAsString();
+
+        assertEquals(this.objectMapper.writeValueAsString(this.mapToDTO(updatedTaskItem)), result);
+    }
 
     @Test
     void testDelete() throws Exception {
         this.mock.perform(request(HttpMethod.DELETE, "/taskItem/delete/" + this.taskItemId)).andExpect(status().isNoContent());
-    }
-
-    @Test
-    void testfindByNameJPQL() throws Exception {
-        List<TaskItemDTO> taskItemList = new ArrayList<>();
-        taskItemList.add(this.taskItemDTO);
-
-        String content = this.mock
-                .perform(request(HttpMethod.GET, "/taskItem/searchName/" + this.testName)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
-        assertEquals(this.objectMapper.writeValueAsString(taskItemList), content);
-    }
-
-
-    @Test
-    void testfindByTaskJPQL() throws Exception {
-        List<TaskItemDTO> taskItemList = new ArrayList<>();
-        taskItemList.add(this.taskItemDTO);
-
-        String content = this.mock
-                .perform(request(HttpMethod.GET, "/taskItem/searchType/" + this.testTask)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
-        assertEquals(this.objectMapper.writeValueAsString(taskItemList), content);
     }
 
 

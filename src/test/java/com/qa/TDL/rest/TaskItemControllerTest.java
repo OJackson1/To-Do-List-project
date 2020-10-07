@@ -38,33 +38,32 @@ public class TaskItemControllerTest {
         return this.modelMapper.map(taskItem, TaskItemDTO.class);
     }
  
-    private List<TaskItem> taskitemList;
+    private List<TaskItem> taskItemList;
     private TaskItem testTaskItem;
     private TaskItem testTaskItemWithId;
-    private TaskItemDTO taskitemDTO;
+    private TaskItemDTO taskItemDTO;
     
-    private final String name = "Owen Jackson";
-    private final String task= "Shopping";
+    private final String name = "Owen";
     private final Long taskItemId = 1L;
 
     
 
     @BeforeEach
     void init() {
-        this.taskitemList = new ArrayList<>();
-        this.testTaskItem = new TaskItem(name,task);
-        this.testTaskItemWithId = new TaskItem(testTaskItem.getName(), testTaskItem.getTask());
+        this.taskItemList = new ArrayList<>();
+        this.testTaskItem = new TaskItem(name);
+        this.testTaskItemWithId = new TaskItem(testTaskItem.getName());
         this.testTaskItemWithId.setTaskItemId(taskItemId);
-        this.taskitemList.add(testTaskItemWithId);
-        this.taskitemDTO = this.mapToDTO(testTaskItemWithId);
+        this.taskItemList.add(testTaskItemWithId);
+        this.taskItemDTO = this.mapToDTO(testTaskItemWithId);
     }
 
     @Test
     void createTest() {
         when(this.service.create(testTaskItem))
-            .thenReturn(this.taskitemDTO);
+            .thenReturn(this.taskItemDTO);
         
-        assertThat(new ResponseEntity<TaskItemDTO>(this.taskitemDTO, HttpStatus.CREATED))
+        assertThat(new ResponseEntity<TaskItemDTO>(this.taskItemDTO, HttpStatus.CREATED))
                 .isEqualTo(this.controller.create(testTaskItem));
         
         verify(this.service, times(1))
@@ -74,9 +73,9 @@ public class TaskItemControllerTest {
     @Test
     void readTest() {
         when(this.service.read(this.taskItemId))
-            .thenReturn(this.taskitemDTO);
+            .thenReturn(this.taskItemDTO);
         
-        assertThat(new ResponseEntity<TaskItemDTO>(this.taskitemDTO, HttpStatus.OK))
+        assertThat(new ResponseEntity<TaskItemDTO>(this.taskItemDTO, HttpStatus.OK))
                 .isEqualTo(this.controller.read(this.taskItemId));
         
         verify(this.service, times(1))
@@ -85,25 +84,23 @@ public class TaskItemControllerTest {
 
     @Test
     void readAllTest() {
-        when(service.read())
-            .thenReturn(this.taskitemList
+        when(service.readAll())
+            .thenReturn(this.taskItemList
                     .stream()
                     .map(this::mapToDTO)
                     .collect(Collectors.toList()));
         
-        assertThat(this.controller.read().getBody()
+        assertThat(this.controller.readAll().getBody()
                 .isEmpty()).isFalse();
         
         verify(service, times(1))
-            .read();
+            .readAll();
     }
 
     @Test
     void updateTest() {
-        // given
-    	TaskItemDTO newTaskItem = new TaskItemDTO(null, "Loo reed","Fitness");
-    	TaskItemDTO updatedTaskItem = new TaskItemDTO(this.taskItemId, newTaskItem.getName(),
-                newTaskItem.getTask());
+    	TaskItemDTO newTaskItem = new TaskItemDTO(null, "Eggs");
+    	TaskItemDTO updatedTaskItem = new TaskItemDTO(this.taskItemId, newTaskItem.getName());
 
         when(this.service.update(newTaskItem, this.taskItemId))
             .thenReturn(updatedTaskItem);

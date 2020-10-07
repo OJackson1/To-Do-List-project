@@ -27,7 +27,7 @@ public class TaskItemServiceTest {
     private TaskItemService service;
 
     @MockBean
-    private TaskItemRepository repo;
+    private TaskItemRepository repository;
 
     @MockBean
     private ModelMapper modelMapper;
@@ -39,125 +39,94 @@ public class TaskItemServiceTest {
     private TaskItemDTO taskItemDTO;
 
     final Long taskItemId = 1L;
-    final String testName = "Owen Jackson";
-    final String testTask = "Shopping";
+    final String testName = "Eggs";
 
     private TaskItemDTO mapToDTO(TaskItem taskItem) {
         return this.modelMapper.map(taskItem, TaskItemDTO.class);
     }
 
-//    @BeforeEach
-//    void init() {
-//        this.taskItemList = new ArrayList<>();
-//        this.taskItemList.add(testTaskItem);
-//        this.testTaskItem = new TaskItem("Owen Jackson","Shopping");
-//        this.testTaskItemWithId = new TaskItem(testTaskItem.getName(),
-//                testTaskItem.getTask());
-//        this.emptyTaskItem = new TaskItem();
-//        this.testTaskItemWithId.setTaskItemId(taskItemId);
-//        this.taskItemDTO = new ModelMapper().map(testTaskItemWithId, TaskItemDTO.class);
-//    }
+    @BeforeEach
+    void init() {
+        this.taskItemList = new ArrayList<>();
+        this.taskItemList.add(testTaskItem);
+        this.testTaskItem = new TaskItem(testName);
+        this.testTaskItemWithId = new TaskItem(testTaskItem.getName());
+        this.emptyTaskItem = new TaskItem();
+        this.testTaskItemWithId.setTaskItemId(taskItemId);
+        this.taskItemDTO = new ModelMapper().map(testTaskItemWithId, TaskItemDTO.class);
+    }
 
     @Test
     void createTest() {
         when(this.modelMapper.map(mapToDTO(testTaskItem), TaskItem.class)).thenReturn(testTaskItem);
 
-        when(this.repo.save(testTaskItem)).thenReturn(testTaskItemWithId);
+        when(this.repository.save(testTaskItem)).thenReturn(testTaskItemWithId);
 
         when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class)).thenReturn(taskItemDTO);
 
-        assertThat(this.taskItemDTO).isEqualTo(this.service.create(testTaskItem));
+        TaskItemDTO expected = this.taskItemDTO;
+        TaskItemDTO actual = this.service.create(this.testTaskItem);
+        assertThat(expected).isEqualTo(actual);
 
-        verify(this.repo, times(1)).save(this.testTaskItem);
+        verify(this.repository, times(1)).save(this.testTaskItem);
     }
 
     @Test
     void readTest() {
-        when(this.repo.findById(this.taskItemId)).thenReturn(Optional.of(this.testTaskItemWithId));
+        when(this.repository.findById(this.taskItemId)).thenReturn(Optional.of(this.testTaskItemWithId));
 
         when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class)).thenReturn(taskItemDTO);
 
         assertThat(this.taskItemDTO).isEqualTo(this.service.read(this.taskItemId));
 
-        verify(this.repo, times(1)).findById(this.taskItemId);
+        verify(this.repository, times(1)).findById(this.taskItemId);
     }
 
     @Test
     void readAllTest() {
-        when(repo.findAll()).thenReturn(this.taskItemList);
+        when(repository.findAll()).thenReturn(this.taskItemList);
 
         when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class)).thenReturn(taskItemDTO);
 
-        assertThat(this.service.read().isEmpty()).isFalse();
+        assertThat(this.service.readAll().isEmpty()).isFalse();
 
-        verify(repo, times(1)).findAll();
+        verify(repository, times(1)).findAll();
     }
 
-//    @Test
-//    void updateTest() {
-//        final long ID = 1L;
-//
-//        TaskItemDTO newTaskItem = new TaskItemDTO(null, "Owen Jackson", "Shopping");
-//
-//        TaskItem taskItem = new TaskItem("Loo Reed", "Fitness");
-//        taskItem.setTaskItemId(ID);
-//
-//        TaskItem updatedTaskItem = new TaskItem(newTaskItem.getName(),
-//                newTaskItem.getTask());
-//        updatedTaskItem.setTaskItemId(ID);
-//
-//        TaskItemDTO updatedDTO = new TaskItemDTO(ID, updatedTaskItem.getName(),
-//                updatedTaskItem.getTask());
-//
-//        when(this.repo.findById(this.taskItemId)).thenReturn(Optional.of(taskItem));
-//
-//        when(this.repo.save(updatedTaskItem)).thenReturn(updatedTaskItem);
-//
-//        when(this.modelMapper.map(updatedTaskItem, TaskItemDTO.class)).thenReturn(updatedDTO);
-//
-//        assertThat(updatedDTO).isEqualTo(this.service.update(newTaskItem, this.taskItemId));
-//
-//        verify(this.repo, times(1)).findById(1L);
-//
-//        verify(this.repo, times(1)).save(updatedTaskItem);
-//    }
+    @Test
+    void updateTest() {
+    	 TaskItem taskItem = new TaskItem("Eggs");
+         taskItem.setTaskItemId(this.taskItemId);
+
+         TaskItemDTO taskItemDTO = new TaskItemDTO(null, "Eggs");
+
+         TaskItem updatedTaskItem = new TaskItem(taskItemDTO.getName());
+         updatedTaskItem.setTaskItemId(this.taskItemId);
+
+         TaskItemDTO updatedTaskItemDTO = new TaskItemDTO(this.taskItemId, updatedTaskItem.getName());
+
+         when(this.repository.findById(this.taskItemId)).thenReturn(Optional.of(taskItem));
+
+         when(this.repository.save(taskItem)).thenReturn(updatedTaskItem);
+
+         when(this.modelMapper.map(updatedTaskItem, TaskItemDTO.class)).thenReturn(updatedTaskItemDTO);
+
+         assertThat(updatedTaskItemDTO).isEqualTo(this.service.update(taskItemDTO, this.taskItemId));
+
+         verify(this.repository, times(1)).findById(1L);
+         verify(this.repository, times(1)).save(updatedTaskItem);
+     }
+
 
     @Test
     void deleteTest() {
-        when(this.repo.existsById(taskItemId)).thenReturn(true, false);
+        when(this.repository.existsById(taskItemId)).thenReturn(true, false);
 
         assertThat(this.service.delete(taskItemId)).isTrue();
 
-        verify(this.repo, times(1)).deleteById(taskItemId);
+        verify(this.repository, times(1)).deleteById(taskItemId);
 
-        verify(this.repo, times(2)).existsById(taskItemId);
-    }
-
-    @Test
-    void findByNameJPQLTest() {
-        emptyTaskItem.setName(testName);
-
-        when(this.repo.findByNameJPQL(this.testName)).thenReturn(Optional.of(emptyTaskItem));
-
-        when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class)).thenReturn(taskItemDTO);
-
-        assertThat(this.service.findByNameJPQL(this.testName).isEmpty()).isFalse();
-
-        verify(this.repo, times(1)).findByNameJPQL(this.testName);
-    }
-
-    
-    @Test
-    void findByTypeJPQLTest() {
-        emptyTaskItem.setTask(testTask);
-
-        when(this.repo.findByTypeJPQL(this.testTask)).thenReturn(Optional.of(emptyTaskItem));
-
-        when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class)).thenReturn(taskItemDTO);
-
-        assertThat(this.service.findByTypeJPQL(this.testTask).isEmpty()).isFalse();
-
-        verify(this.repo, times(1)).findByTypeJPQL(this.testTask);
+        verify(this.repository, times(2)).existsById(taskItemId);
     }
 
 }
