@@ -52,12 +52,12 @@ public class TaskControllerIntergrationTest {
 
     @BeforeEach
     void init() {
-        this.repository.deleteAll();
+    	this.repository.deleteAll();
         this.testTask = new Task("Shopping");
-        this.testName = this.testTaskWithId.getName();
         this.testTaskWithId = this.repository.save(this.testTask);
-        this.taskId = this.testTaskWithId.getTaskId();
         this.taskDTO = this.mapToDTO(testTaskWithId);
+        this.taskId = this.testTaskWithId.getTaskId();
+        this.testName = this.testTaskWithId.getName();
     }
 
     @Test

@@ -22,6 +22,7 @@ import com.qa.TDL.dto.TaskDTO;
 import com.qa.TDL.persistence.domain.Task;
 import com.qa.TDL.service.TaskService;
 
+@SpringBootTest
 public class TaskControllerTest {
 	
 	@Autowired

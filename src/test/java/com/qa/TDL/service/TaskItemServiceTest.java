@@ -58,39 +58,50 @@ public class TaskItemServiceTest {
 
     @Test
     void createTest() {
-        when(this.modelMapper.map(mapToDTO(testTaskItem), TaskItem.class)).thenReturn(testTaskItem);
+        when(this.modelMapper.map(mapToDTO(testTaskItem), TaskItem.class))
+        .thenReturn(testTaskItem);
 
-        when(this.repository.save(testTaskItem)).thenReturn(testTaskItemWithId);
+        when(this.repository.save(testTaskItem))
+        .thenReturn(testTaskItemWithId);
 
-        when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class)).thenReturn(taskItemDTO);
+        when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class))
+        .thenReturn(taskItemDTO);
 
         TaskItemDTO expected = this.taskItemDTO;
         TaskItemDTO actual = this.service.create(this.testTaskItem);
         assertThat(expected).isEqualTo(actual);
 
-        verify(this.repository, times(1)).save(this.testTaskItem);
+        verify(this.repository, times(1))
+        .save(this.testTaskItem);
     }
 
     @Test
     void readTest() {
-        when(this.repository.findById(this.taskItemId)).thenReturn(Optional.of(this.testTaskItemWithId));
+        when(this.repository.findById(this.taskItemId))
+        .thenReturn(Optional.of(this.testTaskItemWithId));
 
-        when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class)).thenReturn(taskItemDTO);
+        when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class))
+        .thenReturn(taskItemDTO);
 
-        assertThat(this.taskItemDTO).isEqualTo(this.service.read(this.taskItemId));
+        assertThat(this.taskItemDTO).isEqualTo(this.service
+        .read(this.taskItemId));
 
-        verify(this.repository, times(1)).findById(this.taskItemId);
+        verify(this.repository, times(1))
+        .findById(this.taskItemId);
     }
 
     @Test
     void readAllTest() {
         when(repository.findAll()).thenReturn(this.taskItemList);
 
-        when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class)).thenReturn(taskItemDTO);
+        when(this.modelMapper.map(testTaskItemWithId, TaskItemDTO.class))
+        .thenReturn(taskItemDTO);
 
-        assertThat(this.service.readAll().isEmpty()).isFalse();
+        assertThat(this.service.readAll()
+        .isEmpty()).isFalse();
 
-        verify(repository, times(1)).findAll();
+        verify(repository, times(1))
+        .findAll();
     }
 
     @Test
@@ -103,18 +114,24 @@ public class TaskItemServiceTest {
          TaskItem updatedTaskItem = new TaskItem(taskItemDTO.getName());
          updatedTaskItem.setTaskItemId(this.taskItemId);
 
-         TaskItemDTO updatedTaskItemDTO = new TaskItemDTO(this.taskItemId, updatedTaskItem.getName());
+         TaskItemDTO updatedTaskItemDTO = new TaskItemDTO(this
+        		 .taskItemId, updatedTaskItem.getName());
 
-         when(this.repository.findById(this.taskItemId)).thenReturn(Optional.of(taskItem));
+         when(this.repository.findById(this.taskItemId))
+         .thenReturn(Optional.of(taskItem));
 
-         when(this.repository.save(taskItem)).thenReturn(updatedTaskItem);
+         when(this.repository.save(taskItem))
+         .thenReturn(updatedTaskItem);
 
          when(this.modelMapper.map(updatedTaskItem, TaskItemDTO.class)).thenReturn(updatedTaskItemDTO);
 
-         assertThat(updatedTaskItemDTO).isEqualTo(this.service.update(taskItemDTO, this.taskItemId));
+         assertThat(updatedTaskItemDTO).isEqualTo(this
+        		 .service.update(taskItemDTO, this.taskItemId));
 
-         verify(this.repository, times(1)).findById(1L);
-         verify(this.repository, times(1)).save(updatedTaskItem);
+         verify(this.repository, times(1))
+         .findById(1L);
+         verify(this.repository, times(1))
+         .save(updatedTaskItem);
      }
 
 
@@ -122,11 +139,14 @@ public class TaskItemServiceTest {
     void deleteTest() {
         when(this.repository.existsById(taskItemId)).thenReturn(true, false);
 
-        assertThat(this.service.delete(taskItemId)).isTrue();
+        assertThat(this.service.delete(taskItemId))
+        .isTrue();
 
-        verify(this.repository, times(1)).deleteById(taskItemId);
+        verify(this.repository, times(1))
+        .deleteById(taskItemId);
 
-        verify(this.repository, times(2)).existsById(taskItemId);
+        verify(this.repository, times(2))
+        .existsById(taskItemId);
     }
 
 }

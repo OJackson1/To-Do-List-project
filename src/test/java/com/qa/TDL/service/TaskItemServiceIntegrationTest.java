@@ -11,11 +11,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.qa.TDL.dto.TaskDTO;
 import com.qa.TDL.dto.TaskItemDTO;
 import com.qa.TDL.persistence.domain.TaskItem;
 import com.qa.TDL.persistence.repository.TaskItemRepository;
-import com.qa.TDL.service.TaskItemService;
 
 @SpringBootTest
 public class TaskItemServiceIntegrationTest {
@@ -26,6 +24,13 @@ public class TaskItemServiceIntegrationTest {
     @Autowired
     private TaskItemRepository repository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
+    private TaskItemDTO mapToDTO(TaskItem taskitem) {
+        return this.modelMapper.map(taskitem, TaskItemDTO.class);
+    }
+    
     private TaskItem testTaskItem;
     private TaskItemDTO testTaskItemDTO;
     private TaskItem testTaskItemWithId;
@@ -33,38 +38,35 @@ public class TaskItemServiceIntegrationTest {
     private Long taskItemId;
     private final String name = "Eggs";
 
-    @Autowired
-    private ModelMapper modelMapper;
-
-    private TaskItemDTO mapToDTO(TaskItem taskitem) {
-        return this.modelMapper.map(taskitem, TaskItemDTO.class);
-    }
-
     @BeforeEach
     void init() {
         this.repository.deleteAll();
-        this.testTaskItem = new TaskItem(name);
-        this.taskItemId = this.testTaskItemWithId.getTaskItemId();
-        this.testTaskItemDTO = this.mapToDTO(testTaskItemWithId);
+        this.testTaskItem= new TaskItem(name);
         this.testTaskItemWithId = this.repository.save(this.testTaskItem);
+        this.testTaskItemDTO = this.mapToDTO(testTaskItemWithId);
+        this.taskItemId = this.testTaskItemWithId.getTaskItemId();
     }
 
     @Test
     void testCreate() {
         assertThat(this.testTaskItemWithId)
-            .isEqualTo(this.service.create(testTaskItem));
+        .isEqualTo(this.service
+        .create(testTaskItem));
     }
 
     @Test
     void testRead() {
         assertThat(this.testTaskItemDTO)
-            .isEqualTo(this.service.read(this.taskItemId));
+            .isEqualTo(this.service
+            .read(this.taskItemId));
     }
 
     @Test
     void testReadAll() {
         assertThat(this.service.readAll())
-            .isEqualTo(Stream.of(this.testTaskItemDTO).collect(Collectors.toList()));
+            .isEqualTo(Stream.of(this
+            .testTaskItemDTO).collect(Collectors
+            .toList()));
     }
 
     @Test
@@ -72,13 +74,15 @@ public class TaskItemServiceIntegrationTest {
     	TaskItemDTO newTaskItem = new TaskItemDTO(null, "Shopping");
     	TaskItemDTO updatedTaskItem = new TaskItemDTO(this.taskItemId,newTaskItem.getName());
 
-        assertThat(this.service.update(newTaskItem, this.testTaskItemWithId.getTaskItemId()))
+        assertThat(this.service.update(newTaskItem, this
+        	.testTaskItemWithId.getTaskItemId()))
             .isEqualTo(updatedTaskItem);
     }
 
     @Test
     void testDelete() {
-        assertThat(this.service.delete(this.taskItemId))
+        assertThat(this.service
+        	.delete(this.taskItemId))
             .isTrue();
     }
 
