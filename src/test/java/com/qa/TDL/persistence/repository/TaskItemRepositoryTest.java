@@ -22,7 +22,7 @@ public class TaskItemRepositoryTest {
 	    private final String TEST_NAME = "Owen";
 	    private final String TEST_TASK = "Shopping";
 
-	    private final TaskItem TEST_TASKITEM = new TaskItem(TEST_NAME,TEST_TASK);
+	//    private final TaskItem TEST_TASKITEM = new TaskItem(TEST_NAME,TEST_TASK);
 
 	    private List<TaskItem> results;
 
@@ -32,11 +32,11 @@ public class TaskItemRepositoryTest {
 	        this.results = new ArrayList<>();
 	    }
 
-	    @Test
-	    void testFindByNameJPQL() throws Exception {
-	        this.results.add(TEST_TASKITEM);
-	        assertThat(this.repo.findByNameJPQL(TEST_TASKITEM.getName())).isEqualTo(results);
-	    }
+//	    @Test
+//	    void testFindByNameJPQL() throws Exception {
+//	        this.results.add(TEST_TASKITEM);
+//	        assertThat(this.repo.findByNameJPQL(TEST_TASKITEM.getName())).isEqualTo(results);
+//	    }
 
 	    @Test
 	    public void testFindByTypeJPQL() throws Exception {

@@ -32,20 +32,15 @@ public class TaskController {
 	        this.service = service;
 	    }
 
-//	    @PostMapping("/create")
-//	    public ResponseEntity<BandDTO> create(@RequestBody BandDTO bandDTO) {
-//	        return new ResponseEntity<>(this.service.create(bandDTO), HttpStatus.CREATED);
-//	    }
-
 	    @PostMapping("/create")
 	    public ResponseEntity<TaskDTO> create(@RequestBody Task task) {
 	        TaskDTO created = this.service.create(task);
 	        return new ResponseEntity<>(created, HttpStatus.CREATED);
 	    }
 
-	    @GetMapping("/read")
-	    public ResponseEntity<List<TaskDTO>> read() {
-	        return ResponseEntity.ok(this.service.read());
+	    @GetMapping("/readAll")
+	    public ResponseEntity<List<TaskDTO>> readAll() {
+	        return ResponseEntity.ok(this.service.readAll());
 	    }
 
 	    @GetMapping("/read/{id}")
@@ -55,7 +50,8 @@ public class TaskController {
 
 	    @PutMapping("/update/{id}")
 	    public ResponseEntity<TaskDTO> update(@PathVariable Long taskId, @RequestBody TaskDTO taskDTO) {
-	        return new ResponseEntity<>(this.service.update(taskDTO, taskId), HttpStatus.ACCEPTED);
+	    	TaskDTO updated = this.service.update(taskDTO, taskId);
+	        return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
 	    }
 
 	    @DeleteMapping("/delete/{id}")

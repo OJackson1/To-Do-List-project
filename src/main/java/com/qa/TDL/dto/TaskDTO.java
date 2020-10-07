@@ -1,6 +1,5 @@
 package com.qa.TDL.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +19,6 @@ public class TaskDTO {
 	
     private Long taskId;
     private String name;
-    private List<TaskItemDTO> taskItem = new ArrayList<>();
+    private List<TaskItemDTO> taskItem;
 
 }

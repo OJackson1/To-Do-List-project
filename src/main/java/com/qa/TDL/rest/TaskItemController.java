@@ -26,25 +26,11 @@ public class TaskItemController {
 	
 	private TaskItemService service;
 
-    // Constructor Autowiring:
-    //
-    // Spring wires the Controller up to the Service at the moment the Controller is
-    // created,
-    // so, if the autowiring fails, then our Controller object never gets created!
-    // This causes fewer exceptions - if we want to make sure our autowiring has
-    // worked,
-    // all we need to do is check if the Controller exists!
     @Autowired
     public TaskItemController(TaskItemService service) {
         super();
         this.service = service;
     }
-
-    // create
-//    @PostMapping("/create")
-//    public ResponseEntity<GuitaristDTO> create(@RequestBody GuitaristDTO guitaristDTO) {
-//        return new ResponseEntity<>(this.service.create(guitaristDTO), HttpStatus.CREATED);
-//    }
 
     @PostMapping("/create")
     public ResponseEntity<TaskItemDTO> create(@RequestBody TaskItem taskItem) {
@@ -53,9 +39,9 @@ public class TaskItemController {
     }
 
     // readAll
-    @GetMapping("/read")
-    public ResponseEntity<List<TaskItemDTO>> read() {
-        return ResponseEntity.ok(this.service.read());
+    @GetMapping("/readAll")
+    public ResponseEntity<List<TaskItemDTO>> readAll() {
+        return ResponseEntity.ok(this.service.readAll());
     }
 
     // readById
@@ -67,28 +53,15 @@ public class TaskItemController {
     // update
     @PutMapping("/update/{id}")
     public ResponseEntity<TaskItemDTO> update(@PathVariable Long taskItemId, @RequestBody TaskItemDTO taskItemDTO) {
-        return new ResponseEntity<>(this.service.update(taskItemDTO, taskItemId), HttpStatus.ACCEPTED);
+    	TaskItemDTO updated = this.service.update(taskItemDTO, taskItemId);
+        return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
     }
 
     // delete
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<TaskItemDTO> delete(@PathVariable Long taskItemId) {
-        // Ternary Statements (If/Else):
-        //
-        // return the boolean result of the delete function
-        // UNLESS the HTTP status returned is 204, in which case throw HTTP status 500
-        return this.service.delete(taskItemId) ? new ResponseEntity<>(HttpStatus.NO_CONTENT) // 204
-                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500
-    }
-
-    @GetMapping("/searchName/{name}")
-    public ResponseEntity<List<TaskItemDTO>> findByNameJPQL(@PathVariable String name) {
-        return ResponseEntity.ok(this.service.findByNameJPQL(name));
-    }
-
-    @GetMapping("/searchType/{task}")
-    public ResponseEntity<List<TaskItemDTO>> findByTypeJPQL(@PathVariable String task) {
-        return ResponseEntity.ok(this.service.findByTypeJPQL(task));
+        return this.service.delete(taskItemId) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

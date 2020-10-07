@@ -17,13 +17,14 @@ import com.qa.TDL.utils.TDLBeanUtils;
 @Service
 public class TaskService {
 	
-	private TaskRepository repo;
+	private TaskRepository repository;
 
     private ModelMapper mapper;
 
     @Autowired
-    public TaskService(TaskRepository repo, ModelMapper mapper) {
-        this.repo = repo;
+    public TaskService(TaskRepository repository, ModelMapper mapper) {
+    	super();
+        this.repository = repository;
         this.mapper = mapper;
     }
 
@@ -31,45 +32,32 @@ public class TaskService {
         return this.mapper.map(task, TaskDTO.class);
     }
 
-    private Task mapFromDTO(TaskDTO taskDTO) {
-        return this.mapper.map(taskDTO, Task.class);
-    }
-
-//    public BandDTO create(BandDTO bandDTO) {
-//        Band toSave = this.mapFromDTO(bandDTO);
-//        Band saved = this.repo.save(toSave);
-//        return this.mapToDTO(saved);
-//    }
-
     public TaskDTO create(Task task) {
-        Task created = this.repo.save(task);
-        TaskDTO mapped = this.mapToDTO(created);
-        return mapped;
+        Task created = this.repository.save(task);
+        return this.mapToDTO(created);
     }
 
-    public List<TaskDTO> read() {
-        List<Task> found = this.repo.findAll();
-        List<TaskDTO> streamed = found.stream().map(this::mapToDTO).collect(Collectors.toList());
-        return streamed;
+    public List<TaskDTO> readAll() {
+    	return this.repository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public TaskDTO read(Long taskId) {
-        Task found = this.repo.findById(taskId).orElseThrow(TaskNotFoundException::new);
+        Task found = this.repository.findById(taskId).orElseThrow(TaskNotFoundException::new);
         return this.mapToDTO(found);
     }
 
     public TaskDTO update(TaskDTO taskDTO, Long taskId) {
-        Task toUpdate = this.repo.findById(taskId).orElseThrow(TaskNotFoundException::new);
+        Task toUpdate = this.repository.findById(taskId).orElseThrow(TaskNotFoundException::new);
         TDLBeanUtils.mergeNotNull(taskDTO, toUpdate);
-        return this.mapToDTO(this.repo.save(toUpdate));
+        return this.mapToDTO(this.repository.save(toUpdate));
     }
 
     public boolean delete(Long taskId) {
-        if (!this.repo.existsById(taskId)) {
+        if (!this.repository.existsById(taskId)) {
             throw new TaskNotFoundException();
         }
-        this.repo.deleteById(taskId);
-        return !this.repo.existsById(taskId);
+        this.repository.deleteById(taskId);
+        return !this.repository.existsById(taskId);
     }
 
 }

@@ -38,7 +38,7 @@ public class TaskItemServiceIntegrationTest {
     @BeforeEach
     void init() {
         this.repo.deleteAll();
-        this.testTaskItem = new TaskItem("Owen Jackson", "Shopping");
+        this.testTaskItem = new TaskItem( "Shopping");
         this.testTaskItemWithId = this.repo.save(this.testTaskItem);
     }
 

@@ -32,7 +32,7 @@ public class TaskControllerIntergrationTest {
     private MockMvc mock;
 
     @Autowired
-    private TaskRepository repo;
+    private TaskRepository repository;
     
     @Autowired
     private ModelMapper modelMapper;
@@ -40,8 +40,10 @@ public class TaskControllerIntergrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    private String testName;
     private Long taskId;
     private Task testTask;
+    private TaskDTO taskDTO;
     private Task testTaskWithId;
     
     private TaskDTO mapToDTO(Task task) {
@@ -50,10 +52,12 @@ public class TaskControllerIntergrationTest {
 
     @BeforeEach
     void init() {
-        this.repo.deleteAll();
+        this.repository.deleteAll();
         this.testTask = new Task("Shopping");
-        this.testTaskWithId = this.repo.save(this.testTask);
+        this.testName = this.testTaskWithId.getName();
+        this.testTaskWithId = this.repository.save(this.testTask);
         this.taskId = this.testTaskWithId.getTaskId();
+        this.taskDTO = this.mapToDTO(testTaskWithId);
     }
 
     @Test
@@ -64,7 +68,7 @@ public class TaskControllerIntergrationTest {
                 .content(this.objectMapper.writeValueAsString(testTask))
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isCreated())
-            .andExpect(content().json(this.objectMapper.writeValueAsString(testTaskWithId)));
+            .andExpect(content().json(this.objectMapper.writeValueAsString(taskDTO)));
     }
 
     @Test
@@ -73,16 +77,16 @@ public class TaskControllerIntergrationTest {
             .perform(request(HttpMethod.GET, "/task/read/" + this.taskId)
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().json(this.objectMapper.writeValueAsString(this.testTask)));
+            .andExpect(content().json(this.objectMapper.writeValueAsString(this.taskDTO)));
     }
 
     @Test
     void testReadAll() throws Exception {
-        List<Task> taskList = new ArrayList<>();
-        taskList.add(this.testTaskWithId);
+        List<TaskDTO> taskList = new ArrayList<>();
+        taskList.add(this.taskDTO);
 
         String content = this.mock
-            .perform(request(HttpMethod.GET, "/task/read")
+            .perform(request(HttpMethod.GET, "/task/readAll")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andReturn().getResponse().getContentAsString();
@@ -92,7 +96,7 @@ public class TaskControllerIntergrationTest {
 
     @Test
     void testUpdate() throws Exception {
-        Task newTask = new Task("Shopping");
+        Task newTask = new Task(null,"Shopping",null);
         Task updatedTask = new Task(newTask.getName());
         updatedTask.setTaskId(this.taskId);
 

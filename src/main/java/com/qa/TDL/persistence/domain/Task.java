@@ -30,20 +30,21 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Task {
 	
-	@Id
+	@Id // Primary Key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
 
-	@Column(name = "task_name")
+	@Column(name = "task")
 	@NotNull
 	@Size(min = 1, max = 60)
     private String name;
-
+	
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<TaskItem> taskItem = new ArrayList<>();
 
-    //public Task(String name) {
-    //    this.name = name;
-   // }
+    public Task(@NotNull @Size(min = 1, max = 120) String name) {
+        super();
+    	this.name = name;
+    }
 
 }

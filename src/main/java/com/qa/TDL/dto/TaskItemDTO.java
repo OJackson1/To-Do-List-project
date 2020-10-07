@@ -20,7 +20,6 @@ public class TaskItemDTO {
 
     private Long taskItemId;
     private String name;
-    private String task;
 
 
 }
