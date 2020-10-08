@@ -53,11 +53,12 @@ public class TaskService {
     }
 
     public boolean delete(Long taskId) {
-        if (!this.repository.existsById(taskId)) {
+        if  (!this.repository.existsById(taskId)) {
             throw new TaskNotFoundException();
-        }
+        } else {
         this.repository.deleteById(taskId);
-        return !this.repository.existsById(taskId);
+        }
+        return !this.repository.existsById(taskId);   
     }
 
 }

@@ -60,8 +60,9 @@ public class TaskItemService {
 	    public boolean delete(Long taskItemId) {
 	        if (!this.repository.existsById(taskItemId)) {
 	            throw new TaskItemNotFoundException();
-	        }
+	        } else {
 	        this.repository.deleteById(taskItemId);
+	        }
 	        return !this.repository.existsById(taskItemId);
 	    }
 
