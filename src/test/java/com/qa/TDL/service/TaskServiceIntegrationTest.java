@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.qa.TDL.dto.TaskDTO;
+import com.qa.TDL.dto.TaskItemDTO;
 import com.qa.TDL.persistence.domain.Task;
 import com.qa.TDL.persistence.repository.TaskRepository;
 
@@ -29,6 +31,8 @@ public class TaskServiceIntegrationTest {
 
 	    @MockBean
 	    private ModelMapper modelMapper;
+	    
+	    private final List<TaskItemDTO> taskItems = new ArrayList();
 
 	    private Task testTask;
 	    private Task testTaskWithId;
@@ -81,15 +85,13 @@ public class TaskServiceIntegrationTest {
 	    @Test
 	    void testUpdate() {
 	    	
-	        TaskDTO newTask = new TaskDTO(null, "Shopping", new ArrayList<>());
-	        TaskDTO updatedTask = new TaskDTO(this.taskId, newTask.getName(), new ArrayList<>());
+	        TaskDTO oldDTO = new TaskDTO(null, "Fitness", this.taskItems);
+	        TaskDTO newDTO = new TaskDTO(this.taskId, oldDTO.getName(), oldDTO.getTaskItem());
 	        
-	    	when(this.modelMapper.map(this.testTaskWithId, TaskDTO.class))
-	    	.thenReturn(this.testTaskDTO);
 
-	        assertThat(updatedTask)
+	        assertThat(newDTO)
 	            .isEqualTo(this
-	            .service.update(newTask, this.taskId));
+	            .service.update(oldDTO, this.taskId));
 	    }
 
 	    @Test

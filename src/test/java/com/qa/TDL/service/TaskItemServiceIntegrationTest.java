@@ -49,7 +49,7 @@ public class TaskItemServiceIntegrationTest {
 
     @Test
     void testCreate() {
-        assertThat(this.testTaskItemWithId)
+        assertThat(this.testTaskItemDTO)
         .isEqualTo(this.service
         .create(testTaskItem));
     }

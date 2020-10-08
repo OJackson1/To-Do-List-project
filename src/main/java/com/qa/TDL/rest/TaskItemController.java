@@ -45,20 +45,20 @@ public class TaskItemController {
     }
 
     // readById
-    @GetMapping("/read/{id}")
+    @GetMapping("/read/{taskItemId}")
     public ResponseEntity<TaskItemDTO> read(@PathVariable Long taskItemId) {
         return ResponseEntity.ok(this.service.read(taskItemId));
     }
 
     // update
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{taskItemId}")
     public ResponseEntity<TaskItemDTO> update(@PathVariable Long taskItemId, @RequestBody TaskItemDTO taskItemDTO) {
     	TaskItemDTO updated = this.service.update(taskItemDTO, taskItemId);
         return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
     }
 
     // delete
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{taskItemId}")
     public ResponseEntity<TaskItemDTO> delete(@PathVariable Long taskItemId) {
         return this.service.delete(taskItemId) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

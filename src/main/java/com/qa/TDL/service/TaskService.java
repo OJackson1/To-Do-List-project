@@ -22,10 +22,10 @@ public class TaskService {
     private ModelMapper mapper;
 
     @Autowired
-    public TaskService(TaskRepository repository, ModelMapper mapper) {
+    public TaskService(TaskRepository repository, ModelMapper model) {
     	super();
         this.repository = repository;
-        this.mapper = mapper;
+        this.mapper = model;
     }
 
     private TaskDTO mapToDTO(Task task) {

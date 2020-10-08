@@ -23,10 +23,10 @@ public class TaskItemService {
 	    private ModelMapper mapper;
 
 	    @Autowired
-	    public TaskItemService(TaskItemRepository repository, ModelMapper mapper) {
+	    public TaskItemService(TaskItemRepository repository, ModelMapper model) {
 	    	super();
 	        this.repository = repository;
-	        this.mapper = mapper;
+	        this.mapper = model;
 	    }
 
 	    private TaskItemDTO mapToDTO(TaskItem taskItem) {
