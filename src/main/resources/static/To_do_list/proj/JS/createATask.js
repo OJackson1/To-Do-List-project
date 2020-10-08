@@ -10,7 +10,7 @@ document.querySelector("form.createATaskForm").addEventListener("submit", functi
 
   function createTask(name){
     fetch("http://localhost:8905/task/create/", {
-        method: 'Post',
+        method: 'POST',
         headers: {
           "Content-type": "application/json"
         },

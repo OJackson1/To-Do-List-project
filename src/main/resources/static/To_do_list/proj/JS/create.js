@@ -11,7 +11,7 @@ document.querySelector("form.createTaskForm").addEventListener("submit", functio
 
   function createTask(name, taskItemId){
     fetch("http://localhost:8905/taskItem/create/", {
-        method: 'post',
+        method: 'POST',
         headers: {
           "Content-type": "application/json"
         },

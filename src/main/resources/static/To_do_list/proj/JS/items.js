@@ -7,8 +7,8 @@ fetch('http://localhost:8905/task/readAll/')
         return;
       }
 
-      response.json().then(function(todoData) {
-        console.log("data",todoData);
+      response.json().then(function(taskItemData) {
+        console.log("data",taskItemData);
 
         // // console.log("this is me",myVar)
         // for (let abc of todoData){
@@ -27,11 +27,11 @@ fetch('http://localhost:8905/task/readAll/')
           
         // }
         
-        for (let i=0;i<todoData.length;i++){
-          let obj = todoData[i].taskItem
+        for (let i=0;i<taskItemData.length;i++){
+          let obj = taskItemData[i].taskItem
           // console.log(obj);
           for(let j=0;j<obj.length;j++){
-            let obj2  =todoData[i].taskItem[j];
+            let obj2  =taskItemData[i].taskItem[j];
             // console.log(obj2)
             for(let key in obj2){
               console.log(obj2,obj2[key]);
@@ -42,10 +42,10 @@ fetch('http://localhost:8905/task/readAll/')
         
 
         let table = document.querySelector("table");
-        let dataHead = Object.keys(todoData[0]);
+        let dataHead = Object.keys(taskItemData[0]);
 
 
-        createTableBody(table, todoData);
+        createTableBody(table, taskItemData);
         createTableHead(table,data);
         
       });
@@ -77,20 +77,19 @@ fetch('http://localhost:8905/task/readAll/')
     th3.appendChild(text3);
     row.appendChild(th3);
 }
-  function createTableBody(table, todoData) {
-      for(let todoRecord of todoData) {
+  function createTableBody(table, taskItemData) {
+      for(let taskItemRecord of taskItemData) {
           let row = table.insertRow();
-          for(values in todoRecord) {
+          for(values in taskItemRecord) {
             if(values === "taskItem") {
               
               for(let key in values){
             console.log("vin",values[key])
-                // console.log("vg",todoData.values[key])
               }
             } else {
-              console.log(todoRecord[values]);
+              console.log(taskItemRecord[values]);
               let cell = row.insertCell()
-              let text = document.createTextNode(todoRecord[values]);
+              let text = document.createTextNode(taskItemRecord[values]);
               cell.appendChild(text);
             }
 
@@ -109,7 +108,7 @@ fetch('http://localhost:8905/task/readAll/')
         let DelText = document.createTextNode("Delete");
         DelButton.className = "btn btn-danger";
         DelButton.onclick = function(){
-          deltodo(todoRecord.taskId);
+          delTaskItem(taskItemRecord.taskId);
           return false;
         };
         DelButton.appendChild(DelText);
@@ -117,7 +116,7 @@ fetch('http://localhost:8905/task/readAll/')
       }
   }
 
-  function deltodo(id){
+  function delTaskItem(id){
     console.log(id)
     console.log(typeof(id))
     fetch("http://localhost:8905/task/delete/"+id, {
@@ -129,7 +128,7 @@ fetch('http://localhost:8905/task/readAll/')
       .then(function (data) {
         console.log('Request succeeded with JSON response', data);
         let deldiv = document.getElementById("deldiv");
-        deldiv.className ="alert alert-warning"
+        deldiv.className ="alert alert-danger"
         deldiv.textContent ="Task Deleted";
         window.location.reload();
         
@@ -137,7 +136,7 @@ fetch('http://localhost:8905/task/readAll/')
       .catch(function (error) {
         console.log('Request failed', error);
         let deldiv = document.getElementById("create");
-        deldiv.className ="alert alert-warning"
-        deldiv.textContent ="Error deleting task";
+        deldiv.className ="alert alert-success"
+        deldiv.textContent ="Error deleting task Item";
       });
 }
