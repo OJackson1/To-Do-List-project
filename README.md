@@ -91,7 +91,6 @@ Selenium test example:
 	    public void UitestCreate() throws InterruptedException {
 	        driver.get("http://localhost:8905/index.html");
 	        Thread.sleep(1000);
-//	        navigate to create Task page
 	        driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
 	        Thread.sleep(1000);
 	        assertThat("Create A Task").isEqualTo(driver.getTitle());
