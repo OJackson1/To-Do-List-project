@@ -45,7 +45,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-1) Clone this Git repository and open it as Maven build in your IDE.
+1) Clone this Git repository master branch and open it as Maven build in your IDE.
 
 2) In src/main/resources, open up the the application-dev.properties and application-prod.properties. From here you need to check the server.port:8905 is free or change to a port which is free on your computer.
 
