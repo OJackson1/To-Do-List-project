@@ -57,7 +57,8 @@ The tests are located under src/test/java.
 The JUnit 
 
 Unit test example: 
-@Test
+
+    @Test
     void createTest() {
 
         when(this.repository.save(this.testTask)).thenReturn(this.testTaskWithId);
@@ -72,7 +73,8 @@ Unit test example:
     }
 
 Integration test example:  	    
-@Test
+
+	    @Test
 	    void testCreate() {
 	    	
 	    	when(this.modelMapper.map(this.testTaskWithId, TaskDTO.class))
