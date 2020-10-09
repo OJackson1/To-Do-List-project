@@ -28,17 +28,11 @@ Requirements (if using Eclipse):
 
 To create an OOP-based web application, with utilisation of supporting tools, methodologies, and technologies, that encapsulates all fundamental and practical modules covered during QA training.
 
-<<<<<<< HEAD
+
 ### Presentation
 
-<<<<<<< HEAD
-Owen Jackson [Presentation](https://qalearning.sharepoint.com/:p:/r/sites/20AugSDET2-Comms-TeamAir/_layouts/15/doc2.aspx?sourcedoc=%7B38D1B013-E88C-4F51-A0C1-3AEB6A205D70%7D&file=To-Do-List%20Project%202.pptx&action=edit&mobileredirect=true&wdPreviousSession=bc445782-c0a6-4ac4-b0f0-c6a83ffef521&wdOrigin=TEAMS-ELECTRON.teams.undefined)
-=======
-Owen Jackson [Presentation](https://qalearning.sharepoint.com/:p:/r/sites/20AugSDET2-Comms-TeamAir/_layouts/15/Doc.aspx?sourcedoc=%7B03682CE2-2B9F-4EB8-83C1-DFA884C872A6%7D&file=IMS%20project.pptx&action=edit&mobileredirect=true&wdPreviousSession=f7493b11-3eaf-4573-97ca-8339192f873f&wdOrigin=TEAMS-ELECTRON.teams.undefined)
->>>>>>> dev
+Owen Jackson [Presentation](https://qalearning.sharepoint.com/:p:/r/sites/20AugSDET2-Comms-TeamAir/_layouts/15/Doc.aspx?sourcedoc=%7B5F6E2F99-14AF-46F3-A35F-CBEF43ADA53C%7D&file=To%20Do%20List.pptx&action=edit&mobileredirect=true&wdPreviousSession=baa60308-7e29-4deb-b853-2cebbf12daf4&wdOrigin=TEAMS-ELECTRON.teams.undefined)
 
-=======
->>>>>>> dev
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
