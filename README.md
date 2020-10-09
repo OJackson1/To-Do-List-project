@@ -28,6 +28,7 @@ Requirements (if using Eclipse):
 
 To create an OOP-based web application, with utilisation of supporting tools, methodologies, and technologies, that encapsulates all fundamental and practical modules covered during QA training.
 
+<<<<<<< HEAD
 ### Presentation
 
 <<<<<<< HEAD
@@ -36,6 +37,8 @@ Owen Jackson [Presentation](https://qalearning.sharepoint.com/:p:/r/sites/20AugS
 Owen Jackson [Presentation](https://qalearning.sharepoint.com/:p:/r/sites/20AugSDET2-Comms-TeamAir/_layouts/15/Doc.aspx?sourcedoc=%7B03682CE2-2B9F-4EB8-83C1-DFA884C872A6%7D&file=IMS%20project.pptx&action=edit&mobileredirect=true&wdPreviousSession=f7493b11-3eaf-4573-97ca-8339192f873f&wdOrigin=TEAMS-ELECTRON.teams.undefined)
 >>>>>>> dev
 
+=======
+>>>>>>> dev
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
