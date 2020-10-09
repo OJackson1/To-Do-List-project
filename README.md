@@ -61,7 +61,7 @@ To run these tests in your IDE, right-click the classes and select "Run as JUnit
   
 If you are using eclipse, you can right-click the project folder and select 'Coverage As...'.
 
-![test](tests.png)
+![test](C:\Users\oejac\Pictures\Screenshots/tests.png)
 
 ## Front-End Built with
 
