@@ -1,11 +1,11 @@
 # To-Do-List-project
 
-###  [Jira](https://ojackson.atlassian.net/secure/RapidBoard.jspa?projectKey=SP&rapidView=3&atlOrigin=eyJpIjoiYjVmMDg3MDg4MGZhNDY4YmExY2FkZTllZjVmYzFiZTUiLCJwIjoiaiJ9)
-
 Coverage: 61.4%
 # Project Title
 
 To Do List Web Application
+
+###  [Jira](https://ojackson.atlassian.net/secure/RapidBoard.jspa?projectKey=SP&rapidView=3&atlOrigin=eyJpIjoiYjVmMDg3MDg4MGZhNDY4YmExY2FkZTllZjVmYzFiZTUiLCJwIjoiaiJ9)
 
 Built with the following starters:
 
