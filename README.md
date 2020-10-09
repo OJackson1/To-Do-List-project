@@ -30,7 +30,7 @@ To create an OOP-based web application, with utilisation of supporting tools, me
 
 ### Presentation
 
-Owen Jackson [Presentation](----)
+Owen Jackson [Presentation](https://qalearning.sharepoint.com/:p:/r/sites/20AugSDET2-Comms-TeamAir/_layouts/15/Doc.aspx?sourcedoc=%7B03682CE2-2B9F-4EB8-83C1-DFA884C872A6%7D&file=IMS%20project.pptx&action=edit&mobileredirect=true&wdPreviousSession=f7493b11-3eaf-4573-97ca-8339192f873f&wdOrigin=TEAMS-ELECTRON.teams.undefined)
 
 ## Getting Started
 
