@@ -36,19 +36,6 @@ Owen Jackson [Presentation](----)
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-•	Version Control System: Git 
-•	Source Code Management: GitHub 
-•	Kanban Board: Jira Board 
-•	Database Management System: Local instance of MySQL Server 5.7 
-•	Back-End Programming Language: Java 
-•	API Development Platform: Spring 
-•	Front-End Web Technologies: HTML, CSS, JavaScript 
-•	Build Tool: Maven 
-•	Unit Testing: JUnit, Mockito 
-•	UI Testing: Selenium
-
 ## API
 
 - Runs on `localhost:8905` as default
@@ -69,9 +56,44 @@ The tests are located under src/test/java.
 
 The JUnit 
 
-Mocktio 
+Unit test example: 
+@Test
+    void createTest() {
 
-Selenium
+        when(this.repository.save(this.testTask)).thenReturn(this.testTaskWithId);
+
+        when(this.modelMapper.map(this.testTaskWithId, TaskDTO.class)).thenReturn(this.taskDTO);
+
+        TaskDTO expected = this.taskDTO;
+        TaskDTO actual = this.service.create(this.testTask);
+        assertThat(expected).isEqualTo(actual);
+
+        verify(this.repository, times(1)).save(this.testTask);
+    }
+
+Integration test example:  	    
+@Test
+	    void testCreate() {
+	    	
+	    	when(this.modelMapper.map(this.testTaskWithId, TaskDTO.class))
+	    	.thenReturn(this.testTaskDTO);
+	    	
+	        assertThat(this.testTaskDTO)
+	            .isEqualTo(this.service
+	            .create(testTask));
+	    }
+
+Selenium test example:
+
+	    @Test
+	    public void UitestCreate() throws InterruptedException {
+	        driver.get("http://localhost:8905/index.html");
+	        Thread.sleep(1000);
+//	        navigate to create Task page
+	        driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
+	        Thread.sleep(1000);
+	        assertThat("Create A Task").isEqualTo(driver.getTitle());
+	    }
   
   
 Using an IDE you can run these tests by right-clicking the classes and selecting "Run as JUnit test" or right-click
@@ -83,6 +105,18 @@ If you are using eclipse, you can right-click the project folder and select 'Cov
 
 If you are using Spring Tool Suite, you need to click Help, then in Eclipse Marketplace search and Install EclEmma Java Code Coverage. Restart your IDE and from there you can you can right-click the project folder and select 'Coverage As...'.
 
+### Software
+
+- Version Control System: Git 
+- Source Code Management: GitHub 
+- Kanban Board: Jira Board 
+- Database Management System: Local instance of MySQL Server 5.7 
+- Back-End Programming Language: Java 
+- API Development Platform: Spring 
+- Front-End Web Technologies: HTML, CSS, JavaScript 
+- Build Tool: Maven 
+- Unit Testing: JUnit, Mockito 
+- UI Testing: Selenium
 
 ## Front-End Built with
 
@@ -91,10 +125,6 @@ If you are using Spring Tool Suite, you need to click Help, then in Eclipse Mark
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
-
-## Built in 
-
-* [Spring Tool Suite] (https://spring.io/tools)
 
 ## Versioning
 
