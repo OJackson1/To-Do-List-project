@@ -29,7 +29,7 @@ public class seleniumUiTests {
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/java/newdrivers/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().setSize(new Dimension(1366, 768));
     }
     
