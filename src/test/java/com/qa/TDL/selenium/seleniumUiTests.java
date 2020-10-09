@@ -3,7 +3,6 @@ package com.qa.TDL.selenium;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
@@ -45,7 +44,7 @@ public class seleniumUiTests {
     
     
     @Test
-    public void UitestCreate() throws InterruptedException {
+    public void UiTestCreate() throws InterruptedException {
         driver.get("http://localhost:8905/index.html");
         Thread.sleep(1500);
         driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
@@ -55,16 +54,16 @@ public class seleniumUiTests {
     
     
     @Test
-    public void UitestCreateTask() throws InterruptedException {
+    public void UiTestCreateTask() throws InterruptedException {
     	driver.get("http://localhost:8905/index.html");
     	Thread.sleep(1500);
         driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
         Thread.sleep(1500);
 //        create 
-        WebElement createBar = driver.findElement(By.id("inputName"));
-        String createTerm = "Shopping";
-        createBar.sendKeys(createTerm);
-        createBar.submit();
+        WebElement input = driver.findElement(By.id("inputName"));
+        String newInput = "Shopping";
+        input.sendKeys(newInput);
+        input.submit();
         
 //       back
         driver.findElement(By.xpath("//*[@id=\"updateBtn\"]")).click();
@@ -76,7 +75,7 @@ public class seleniumUiTests {
     
     
     @Test
-    public void UitestCreateTaskItem() throws InterruptedException {
+    public void UiTestCreateTaskItem() throws InterruptedException {
     	driver.get("http://localhost:8905/index.html");
     	Thread.sleep(1500);
         driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
@@ -93,31 +92,31 @@ public class seleniumUiTests {
         // click add/update
         driver.findElement(By.xpath("/html/body/table/tbody/tr/td[3]/a")).click();
         Thread.sleep(1500);
-   //     click add
+   //     add
         driver.findElement(By.xpath("//*[@id=\"createButton\"]")).click();
         Thread.sleep(1500);
-        // check right page 
+        // check 
         assertThat("Create A Task Item").isEqualTo(driver.getTitle());
     }
     
     
     
     @Test
-    public void UitestDeleteTask() throws InterruptedException {
+    public void UiTestDeleteTask() throws InterruptedException {
     	driver.get("http://localhost:8905/index.html");
     	Thread.sleep(1500);
         driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
         Thread.sleep(1500);
-//        create Task
-        WebElement createBar = driver.findElement(By.id("inputName"));
-        String createTerm = "Shopping";
-        createBar.sendKeys(createTerm);
-        createBar.submit();
+//        create
+        WebElement input = driver.findElement(By.id("inputName"));
+        String newInput = "Shopping";
+        input.sendKeys(newInput);
+        input.submit();
         
-//        Navigate back
+//        back
         driver.findElement(By.xpath("//*[@id=\"updateBtn\"]")).click();
         Thread.sleep(1500);
-//        click delete
+//       delete
         driver.findElement(By.xpath("/html/body/table/tbody/tr/td[4]/a/html/body/table/tbody/tr/td[4]/a")).click();
         Thread.sleep(2000);
 //        check
