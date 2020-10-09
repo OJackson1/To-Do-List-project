@@ -7,6 +7,23 @@ Coverage: 61.4%
 
 To Do List Web Application
 
+Built with the following starters:
+
+- Spring Web
+- H2 Database
+- Spring Data JPA
+- Lombok
+
+Requires the following Maven dependencies:
+
+- [ModelMapper](https://mvnrepository.com/artifact/org.modelmapper/modelmapper/2.3.8)
+- [Swagger-UI v3.0](https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter/3.0.0)
+
+Requirements (if using Eclipse):
+
+- [Spring Tool Suite](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
+- [Lombok](https://projectlombok.org/setup/eclipse)
+
 ### Purpose
 
 To create an OOP-based web application, with utilisation of supporting tools, methodologies, and technologies, that encapsulates all fundamental and practical modules covered during QA training.
@@ -32,40 +49,44 @@ These instructions will get you a copy of the project up and running on your loc
 •	Unit Testing: JUnit, Mockito 
 •	UI Testing: Selenium
 
+## API
+
+- Runs on `localhost:8905` as default
+- H2 console is accessible at the path `/h2` with JDBC URL `jdbc:h2:mem:TDL` and default username/password
+- Swagger UI showing API endpoints is accessible at the path `/swagger-ui/index.html`
+
 ### Installing
 
 1) Clone this Git repository and open it as Maven build in your IDE.
 
-2) Either change the 'connect()' method to your own database connection inside the src/main/java/com/qa/ims/utils/DBUtils.java file OR change the database properties method and modify src/main/java/com/qa/ims/IMS.java to pass the file location of 'properties.db' to connect().
+2) In src/main/resources, open up the the application-dev.properties and application-prod.properties. From here you need to check the server.port:8905 is free or change to a port which is free on your computer.
 
-3)Run the 'Runner.java' class under src/main/java/com/qa/ims to start the application.
+3) Right click on the the TDL project and click run as Spring Boot App.
 
 ## Running the tests
 
-The tests are located under src/test.
+The tests are located under src/test/java.
 
-The Junit tests cover some testing such as checking the Order and Item classes have correct equals() methods.
+The JUnit 
+
+Mocktio 
+
+Selenium
   
-The tests for the Data-Access Objects files are a more complex ensuring objects are 
-processed correctly and that the correct information is passed back. Example:
-
-@Test
-	public void testCreate() {
-		final Customer created = new Customer(6L, "Leeand", "Perrins");
-		assertEquals(created, DAO.create(created));  
   
 Using an IDE you can run these tests by right-clicking the classes and selecting "Run as JUnit test" or right-click
-on the IMS folder and click "Run as JUnit test" to run whole application test.
+on the TDL folder and click "Run as JUnit test" to run whole application test.
 
 To run these tests in your IDE, right-click the classes and select "Run as JUnit test".  
   
 If you are using eclipse, you can right-click the project folder and select 'Coverage As...'.
 
-![test](C:\Users\oejac\Pictures\Screenshots/tests.png)
+If you are using Spring Tool Suite, you need to click Help, then in Eclipse Marketplace search and Install EclEmma Java Code Coverage. Restart your IDE and from there you can you can right-click the project folder and select 'Coverage As...'.
+
 
 ## Front-End Built with
 
-*[Visual Studio Code](https://code.visualstudio.com/)
+* [Visual Studio Code](https://code.visualstudio.com/)
 
 ## Built With
 
