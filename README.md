@@ -61,6 +61,8 @@ To run these tests in your IDE, right-click the classes and select "Run as JUnit
   
 If you are using eclipse, you can right-click the project folder and select 'Coverage As...'.
 
+![test](tests.png)
+
 ## Front-End Built with
 
 *[Visual Studio Code](https://code.visualstudio.com/)
@@ -91,4 +93,4 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Thanks to Nick Alan and Vinesh for all the help
+* Thanks to Nick, Alan and Vinesh for all the help
