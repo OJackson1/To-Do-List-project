@@ -38,7 +38,7 @@ public class seleniumUiTests {
     @Test
     public void UitestHome() throws InterruptedException {
         driver.get("http://localhost:8905/index.html");
-        Thread.sleep(1500);
+        Thread.sleep(1600);
         assertThat("To Do List").isEqualTo(driver.getTitle());
     }
     
@@ -46,9 +46,9 @@ public class seleniumUiTests {
     @Test
     public void UiTestCreate() throws InterruptedException {
         driver.get("http://localhost:8905/index.html");
-        Thread.sleep(1500);
+        Thread.sleep(1600);
         driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
-        Thread.sleep(1500);
+        Thread.sleep(1600);
         assertThat("Create A Task").isEqualTo(driver.getTitle());
     }
     
@@ -56,9 +56,9 @@ public class seleniumUiTests {
     @Test
     public void UiTestCreateTask() throws InterruptedException {
     	driver.get("http://localhost:8905/index.html");
-    	Thread.sleep(1500);
+    	Thread.sleep(1600);
         driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
-        Thread.sleep(1500);
+        Thread.sleep(1600);
 //        create 
         WebElement input = driver.findElement(By.id("inputName"));
         String newInput = "Shopping";
@@ -67,7 +67,7 @@ public class seleniumUiTests {
         
 //       back
         driver.findElement(By.xpath("//*[@id=\"updateBtn\"]")).click();
-        Thread.sleep(1500);
+        Thread.sleep(1600);
 //        is it there
         assertThat(driver.findElement(By.xpath("/html/body/table/tbody/tr/td[2]")).isDisplayed());
     }
@@ -77,9 +77,9 @@ public class seleniumUiTests {
     @Test
     public void UiTestCreateTaskItem() throws InterruptedException {
     	driver.get("http://localhost:8905/index.html");
-    	Thread.sleep(1500);
+    	Thread.sleep(1600);
         driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
-        Thread.sleep(1500);
+        Thread.sleep(1600);
 //        create
         WebElement createBar = driver.findElement(By.id("inputName"));
         String createTerm = "Shopping";
@@ -88,13 +88,13 @@ public class seleniumUiTests {
         
 //		 back 
         driver.findElement(By.xpath("//*[@id=\"updateBtn\"]")).click();  
-        Thread.sleep(1500);
+        Thread.sleep(1600);
         // click add/update
         driver.findElement(By.xpath("/html/body/table/tbody/tr/td[3]/a")).click();
-        Thread.sleep(1500);
+        Thread.sleep(1600);
    //     add
         driver.findElement(By.xpath("//*[@id=\"createButton\"]")).click();
-        Thread.sleep(1500);
+        Thread.sleep(1600);
         // check 
         assertThat("Create A Task Item").isEqualTo(driver.getTitle());
     }
@@ -104,9 +104,9 @@ public class seleniumUiTests {
     @Test
     public void UiTestDeleteTask() throws InterruptedException {
     	driver.get("http://localhost:8905/index.html");
-    	Thread.sleep(1500);
+    	Thread.sleep(1600);
         driver.findElement(By.xpath("//*[@id=\"createBtn\"]")).click();
-        Thread.sleep(1500);
+        Thread.sleep(1600);
 //        create
         WebElement input = driver.findElement(By.id("inputName"));
         String newInput = "Shopping";
@@ -115,7 +115,7 @@ public class seleniumUiTests {
         
 //        back
         driver.findElement(By.xpath("//*[@id=\"updateBtn\"]")).click();
-        Thread.sleep(1500);
+        Thread.sleep(1600);
 //       delete
         driver.findElement(By.xpath("/html/body/table/tbody/tr/td[4]/a/html/body/table/tbody/tr/td[4]/a")).click();
         Thread.sleep(2000);
