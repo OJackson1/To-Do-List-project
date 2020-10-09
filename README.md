@@ -54,9 +54,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 The tests are located under src/test/java.
 
-The JUnit 
+For the tests, JUnit and Mockito are used for unit and intergration tests whereas Selenium is used for UI testing of the front-end.
 
-Unit test example: 
+Unit - testing where individual units / components of a software are tested. The purpose is to validate that each unit of the software performs as designed.
+Test example: 
 
     @Test
     void createTest() {
@@ -72,7 +73,8 @@ Unit test example:
         verify(this.repository, times(1)).save(this.testTask);
     }
 
-Integration test example:  	    
+Integration -  testing where individual units / components are combined and tested as a group. The purpose of this level of testing is to expose faults in the interaction between integrated units.
+Test example:  	    
 
 	    @Test
 	    void testCreate() {
@@ -85,7 +87,8 @@ Integration test example:
 	            .create(testTask));
 	    }
 
-Selenium test example:
+Selenium - an open-source automated testing framework used to validate web applications across different browsers and platforms.
+Test example:
 
 	    @Test
 	    public void UitestCreate() throws InterruptedException {
