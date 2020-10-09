@@ -129,7 +129,7 @@ fetch('http://localhost:8905/task/readAll/')
       .then(function (data) {
         console.log('Request succeeded with JSON response', data);
         let deldiv = document.getElementById("deldiv");
-        deldiv.className ="alert alert-warning"
+        deldiv.className ="alert alert-success"
         deldiv.textContent ="Task Deleted";
         window.location.reload();
         

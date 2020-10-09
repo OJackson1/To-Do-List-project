@@ -1,25 +1,22 @@
-document.querySelector("form.createTaskForm").addEventListener("submit", function (stop) {
+document.querySelector("form.createTaskItemForm").addEventListener("submit", function (stop) {
     stop.preventDefault();
 
-    let formElements = document.querySelector("form.createTaskForm").elements;
+    let formElements = document.querySelector("form.createATaskItemForm").elements;
      console.log(formElements);
     let name=formElements["inputName"].value
-    let taskItemId=formElements["inputId"].value
+   
 
-    createTask(name,taskItemId)
+    createTaskItem(name)
   });
 
-  function createTask(name, taskItemId){
+  function createTaskItem(name){
     fetch("http://localhost:8905/taskItem/create/", {
-        method: 'POST',
+        method: 'Post',
         headers: {
           "Content-type": "application/json"
         },
         body: json = JSON.stringify({
             "name": name,
-            "taskItem": {
-                "taskItemId": taskItemId
-            }
         })
       })
       .then(json)

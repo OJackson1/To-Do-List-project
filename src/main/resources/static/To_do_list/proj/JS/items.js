@@ -1,4 +1,4 @@
-fetch('http://localhost:8905/task/readAll/')
+fetch('http://localhost:8905/taskItem/readAll/')
   .then(
     function(response) {
       if (response.status !== 200) {
@@ -10,22 +10,6 @@ fetch('http://localhost:8905/task/readAll/')
       response.json().then(function(taskItemData) {
         console.log("data",taskItemData);
 
-        // // console.log("this is me",myVar)
-        // for (let abc of todoData){
-        //   // console.log(abc)
-        //   // console.log(todoData.taskItem[abc])
-        //   for (values in abc){
-        //     if(values =="taskItem"){
-        //       console.log("abc",abc[values])
-        //       for(let key of values){
-        //         console.log(values[key])
-        //         console.log(key)
-        //       }
-        //       }
-          
-        //     }
-          
-        // }
         
         for (let i=0;i<taskItemData.length;i++){
           let obj = taskItemData[i].taskItem
@@ -94,14 +78,6 @@ fetch('http://localhost:8905/task/readAll/')
             }
 
           }
-          
-          let cellView = row.insertCell();
-          let viewButton = document.createElement("a");
-          let viewText = document.createTextNode("ADD/UPDATE");
-          viewButton.className = "btn btn-info";
-          viewButton.href = 'createATaskItem.html'
-          viewButton.appendChild(viewText);
-          cellView.appendChild(viewButton);
           
         let cellDell = row.insertCell();
         let DelButton = document.createElement("a");
